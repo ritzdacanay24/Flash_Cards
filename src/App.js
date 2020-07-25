@@ -6,7 +6,7 @@ import Header from './components/Header';
 function App() {
   return (
     <div className="App">
-      <Header></Header>
+      <Header title="Flash Cards"></Header>
       <Cards></Cards>
 
     </div>
