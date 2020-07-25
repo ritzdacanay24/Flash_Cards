@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {
-    Card, CardImg, CardText, CardBody, CardLink,
+    Card, CardBody,
     CardTitle, CardSubtitle
 } from 'reactstrap';
 
@@ -17,23 +17,24 @@ export default class Cards extends React.Component {
                 this.setState({ cards })
             })
     }
+
+    goToCarddetails = (cardId) => {
+        this.props.history.push('/CardsDetails', {
+            cardId: cardId
+        })
+    }
+
     render() {
         return (
             <div>
                 <div className="container">
                     <div className="row">
-                        {this.state.cards.map(person =>
-                            <div className="col-lg-4">
-                                <Card>
+                        {this.state.cards.map((person, index) =>
+                            <div className="col-lg-4  px-md-5" key={index}>
+                                <Card onClick = {()=>this.goToCarddetails(person._id)}>
                                     <CardBody>
                                         <CardTitle>{person.title}</CardTitle>
-                                        <CardSubtitle>Card subtitle</CardSubtitle>
-                                    </CardBody>
-                                    <img width="100%" src="/assets/318x180.svg" alt="Card image cap" />
-                                    <CardBody>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                        <CardLink href="#">Card Link</CardLink>
-                                        <CardLink href="#">Another Link</CardLink>
+                                        <CardSubtitle>Total: {person.cards.length}</CardSubtitle>
                                     </CardBody>
                                 </Card>
                             </div>
