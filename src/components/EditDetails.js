@@ -4,26 +4,26 @@ import axios from 'axios';
 
 const EditDetailsModal = (props) => {
 
-    let { buttonLabel, className, details, main } = props;
-
+    let { buttonLabel, className, details, collectionId } = props;
+    
     const [modal, setModal] = useState(false);
-    const [unmountOnClose, setUnmountOnClose] = useState(true);
+    const [unmountOnClose] = useState(true);
 
     const toggle = () => setModal(!modal);
 
     const save = (props) => {
 
         let obj = {
-            "word": details.word,
-            "definition": props
+            word : details.word,
+            definition : props
         }
 
-        axios.put(`http://localhost:5000/api/collections/${main.id}/cards/${details._id}`, { obj })
-            .then(res => {
-                setModal(false);
-            }, function(){
-                alert('something wentwrong')
-            })
+        axios.put(`http://localhost:5000/api/collections/${collectionId}/cards/${details._id}`, obj )
+        .then(res => {
+            setModal(false);
+        }, function(){
+            alert('Something went wrong')
+        })
 
     }
 

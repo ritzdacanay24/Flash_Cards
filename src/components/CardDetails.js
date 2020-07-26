@@ -9,27 +9,33 @@ import {
 } from 'reactstrap';
 
 export default class CardDetails extends React.Component {
-    state = {
-        details: [],
-        startViewDetails: [],
-        showResults: false,
-        currentIndex: null,
-        main: {}
+    
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            details: [],
+            startViewDetails: [],
+            showResults: false,
+            currentIndex: null,
+            collectionId: null
+        }
     }
 
     componentDidMount() {
+        this.getCollectionById();
+    }
+
+    getCollectionById = () => {
         let cardIdView = this.props.location.state;
 
         axios.get('http://localhost:5000/api/collections/' + cardIdView.cardId)
             .then(res => {
 
                 this.setState({
-                    main: {
-                        id: res.data._id,
-                        title: res.data.title
-                    }, 
-                    details: res.data.cards, 
-                    showResults:false
+                    collectionId: res.data._id,
+                    details: res.data.cards,
+                    showResults: false
                 })
                 this.changeCardId(0)
             })
@@ -43,9 +49,9 @@ export default class CardDetails extends React.Component {
         for (let i = 0; i < this.state.details.length; i++) {
             if (i === startView) {
                 this.setState({
-                    startViewDetails: this.state.details[i], 
-                    currentIndex: i, 
-                    showResults:false
+                    startViewDetails: this.state.details[i],
+                    currentIndex: i,
+                    showResults: false
                 })
                 break;
             }
@@ -78,7 +84,7 @@ export default class CardDetails extends React.Component {
                                     <CardBody>
                                         <CardTitle><h3>{this.state.startViewDetails.word}</h3></CardTitle>
                                         <Button className="mt-auto" color="danger" onClick={() => this.viewResults()}>See Definition!</Button>
-                                        <EditDetailsModal buttonLabel="Edit" details={this.state.startViewDetails} main={this.state.main} />
+                                        <EditDetailsModal buttonLabel="Edit" details={this.state.startViewDetails} collectionId={this.state.collectionId} />
                                     </CardBody>
                                     :
                                     <CardBody>
