@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 
 import Cards from './components/Cards';
-import CardDetails from './components/CardDetails.js';
+import CardDetails from './components/CardDetails';
+import ManageCards from './components/ManageCards';
 import history from './history';
 
 export default class Routes extends Component {
@@ -12,6 +13,7 @@ export default class Routes extends Component {
                 <Switch>
                     <Route path="/Cards" exact component={Cards} />
                     <Route path="/CardsDetails" exact component={CardDetails} />
+                    <Route path="/ManageCards" exact component={ManageCards} />
                 </Switch>
             </Router>
         )
