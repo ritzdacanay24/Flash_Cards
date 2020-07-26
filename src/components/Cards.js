@@ -6,42 +6,46 @@ import {
 } from 'reactstrap';
 
 export default class Cards extends React.Component {
-    state = {
-        cards: []
-    };
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            cards: []
+        }
+    }
 
     componentDidMount() {
+       this.getCollection()
+    }
+
+    getCollection = () => {
         axios.get('http://localhost:5000/api/collections')
-            .then(res => {
-                const cards = res.data;
-                this.setState({ cards })
-            })
+        .then(res => {
+            this.setState({ cards: res.data })
+        })
     }
 
     goToCarddetails = (cardId) => {
-        this.props.history.push('/CardsDetails', {
-            cardId: cardId
-        })
+        this.props.history.push('/CardsDetails', { cardId: cardId })
     }
 
     render() {
         return (
-            <div>
-                <div className="container">
-                    <div className="row">
-                        {
-                            this.state.cards.map((person, index) =>
-                                <div className="col-lg-4  px-md-5" key={index}>
-                                    <Card onClick={() => this.goToCarddetails(person._id)}>
-                                        <CardBody>
-                                            <CardTitle>{person.title}</CardTitle>
-                                            <CardSubtitle>Total: {person.cards.length}</CardSubtitle>
-                                        </CardBody>
-                                    </Card>
-                                </div>
-                            )
-                        }
-                    </div>
+            <div className="container">
+                <div className="row">
+                    {
+                        this.state.cards.map((person, index) =>
+                            <div className="col-lg-4  px-md-5" key={index}>
+                                <Card onClick={() => this.goToCarddetails(person._id)}>
+                                    <CardBody>
+                                        <CardTitle>{person.title}</CardTitle>
+                                        <CardSubtitle>Total: {person.cards.length}</CardSubtitle>
+                                    </CardBody>
+                                </Card>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         )
