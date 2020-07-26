@@ -43,7 +43,7 @@ export default class CardDetails extends React.Component {
 
     changeCardId = (startView, type) => {
         if (type != null) {
-            type == 'right' ? startView++ : startView--
+            type === 'right' ? startView++ : startView--
         }
 
         for (let i = 0; i < this.state.details.length; i++) {
@@ -84,7 +84,7 @@ export default class CardDetails extends React.Component {
                                     <CardBody>
                                         <CardTitle><h3>{this.state.startViewDetails.word}</h3></CardTitle>
                                         <Button className="mt-auto" color="danger" onClick={() => this.viewResults()}>See Definition!</Button>
-                                        <EditDetailsModal buttonLabel="Edit" details={this.state.startViewDetails} collectionId={this.state.collectionId} />
+                                        <EditDetailsModal modalTitle="Edit" buttonLabel="Edit" details={this.state.startViewDetails} collectionId={this.state.collectionId} />
                                     </CardBody>
                                     :
                                     <CardBody>

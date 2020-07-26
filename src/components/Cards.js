@@ -36,7 +36,7 @@ export default class Cards extends React.Component {
                 <div className="row">
                     {
                         this.state.cards.map((person, index) =>
-                            <div className="col-lg-4  px-md-5" key={index}>
+                            <div className="col-lg-4 px-md-5" key={index}>
                                 <Card onClick={() => this.goToCarddetails(person._id)}>
                                     <CardBody>
                                         <CardTitle>{person.title}</CardTitle>

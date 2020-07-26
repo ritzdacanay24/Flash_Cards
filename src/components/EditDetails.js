@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const EditDetailsModal = (props) => {
 
-    let { buttonLabel, className, details, collectionId } = props;
+    let { buttonLabel, className, details, collectionId, modalTitle } = props;
     
     const [modal, setModal] = useState(false);
     const [unmountOnClose] = useState(true);
@@ -37,7 +37,7 @@ const EditDetailsModal = (props) => {
                 <Button color="danger" onClick={toggle}>{buttonLabel}</Button>
             </Form>
             <Modal isOpen={modal} toggle={toggle} className={className} unmountOnClose={unmountOnClose}>
-                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+                <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>
                 <ModalBody>
                     <Input type="textarea" id="definition" placeholder="Definition" rows={5}
                         onChange={handleChange} defaultValue={details.definition} />
