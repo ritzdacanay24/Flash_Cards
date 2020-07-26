@@ -26,7 +26,12 @@ export default class Cards extends React.Component {
         })
     }
 
-    goToCarddetails = (cardId) => {
+    goToCarddetails = (cardId , collectionCount) => {
+        if(!collectionCount) {
+            alert('No collections'); 
+            return;
+        } 
+        
         this.props.history.push('/CardsDetails', { cardId: cardId })
     }
 
@@ -37,7 +42,7 @@ export default class Cards extends React.Component {
                     {
                         this.state.cards.map((person, index) =>
                             <div className="col-lg-4 px-md-5" key={index}>
-                                <Card onClick={() => this.goToCarddetails(person._id)}>
+                                <Card onClick={() => this.goToCarddetails(person._id, person.cards.length)}>
                                     <CardBody>
                                         <CardTitle>{person.title}</CardTitle>
                                         <CardSubtitle>Total: {person.cards.length}</CardSubtitle>

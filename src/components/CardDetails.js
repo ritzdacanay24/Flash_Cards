@@ -20,10 +20,13 @@ export default class CardDetails extends React.Component {
             currentIndex: null,
             collectionId: null
         }
+
+        this.escFunction = this.escFunction.bind(this);
     }
 
     componentDidMount() {
         this.getCollectionById();
+        document.addEventListener("keydown", this.escFunction, false);
     }
 
     getCollectionById = () => {
@@ -57,28 +60,44 @@ export default class CardDetails extends React.Component {
             }
         }
     }
+    
+    escFunction(event){
+        if(event.keyCode === 39) {
+          this.changeCardId(this.state.currentIndex, 'right')
+        }
+        if(event.keyCode === 37) {
+          this.changeCardId(this.state.currentIndex, 'left')
+        }
+      }
+
+
+    offsetIndex = () => {
+        return this.state.currentIndex + 1;
+    }
 
     viewResults = () => {
         this.setState({ showResults: this.state.showResults = !this.state.showResults });
     }
 
     calculateProgress = () => {
-        return (((this.state.currentIndex + 1) / this.state.details.length) * 100).toFixed(2)
+        return (this.offsetIndex() / this.state.details.length * 100).toFixed(2)
     }
 
     getProgress = () => {
-        return this.state.currentIndex + 1 + ' / ' + this.state.details.length;
+        return this.offsetIndex() + ' / ' + this.state.details.length;
     }
 
     render() {
         return (
             <div>
                 <div className="container">
-                    <div className="text-center">{this.calculateProgress()}%</div>
-                    <Progress value={this.calculateProgress()} />
-                    Progress {this.getProgress()}
                     <div className="row justify-content-center">
                         <div className="col-lg-8">
+                            <div className="text-center">{this.calculateProgress()}%</div>
+                            <Progress value={this.calculateProgress()} />
+                            Progress {this.getProgress()}
+
+                            <br/> <br/>
                             <Card className="p-5 shadow-sm">
                                 {!this.state.showResults ?
                                     <CardBody>
