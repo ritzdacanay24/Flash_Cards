@@ -29,16 +29,18 @@ export default class Cards extends React.Component {
             <div>
                 <div className="container">
                     <div className="row">
-                        {this.state.cards.map((person, index) =>
-                            <div className="col-lg-4  px-md-5" key={index}>
-                                <Card onClick = {()=>this.goToCarddetails(person._id)}>
-                                    <CardBody>
-                                        <CardTitle>{person.title}</CardTitle>
-                                        <CardSubtitle>Total: {person.cards.length}</CardSubtitle>
-                                    </CardBody>
-                                </Card>
-                            </div>
-                        )}
+                        {
+                            this.state.cards.map((person, index) =>
+                                <div className="col-lg-4  px-md-5" key={index}>
+                                    <Card onClick={() => this.goToCarddetails(person._id)}>
+                                        <CardBody>
+                                            <CardTitle>{person.title}</CardTitle>
+                                            <CardSubtitle>Total: {person.cards.length}</CardSubtitle>
+                                        </CardBody>
+                                    </Card>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>
