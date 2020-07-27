@@ -6,12 +6,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText
+  NavLink
 } from 'reactstrap';
 
 const NavbarHeader = (props) => {
@@ -31,6 +26,9 @@ const NavbarHeader = (props) => {
             </NavItem>
             <NavItem>
               <NavLink href="/ManageCards">Manage Cards</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/CreateCard">Create</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
