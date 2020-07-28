@@ -3,6 +3,7 @@ import API from '../api';
 import { Card, CardBody } from 'reactstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class ManageCards extends React.Component {
 
@@ -34,7 +35,7 @@ class ManageCards extends React.Component {
                 this.setState({ details })
 
             }, function () {
-                alert('Something went wrong')
+                NotificationManager.error('Something went wrong', 'Error');
             })
     }
 
@@ -46,7 +47,7 @@ class ManageCards extends React.Component {
             .then(res => {
                 this.setState({ collectionId: value, cards: res.data })
             }, function () {
-                alert('Something went wrong')
+                NotificationManager.error('Something went wrong', 'Error');
             })
     }
 
@@ -76,8 +77,9 @@ class ManageCards extends React.Component {
                     add: this.collectionFields,
                     cards: cards
                 })
+                NotificationManager.success('Added successfully', 'Success');
             }, function () {
-                alert('Something went wrong')
+                NotificationManager.error('Something went wrong', 'Error');
             })
     }
 
@@ -86,9 +88,9 @@ class ManageCards extends React.Component {
         delete this.state.add._id
         API.put(`http://localhost:5000/api/collections/${this.state.collectionId}/cards/${cardId}`, this.state.add)
             .then(res => {
-                console.log(res)
+                NotificationManager.success('Updated successfully', 'Success');
             }, function () {
-                alert('Something went wrong')
+                NotificationManager.error('Something went wrong', 'Error');
             })
     }
 
@@ -116,6 +118,7 @@ class ManageCards extends React.Component {
                         let cards = this.state.cards;
                         cards.splice(index, 1);
                         this.setState({ cards });
+                        NotificationManager.success('Deleted successfully', 'Success');
 
                     }, function () {
                         alert('Something went wrong')
@@ -142,7 +145,7 @@ class ManageCards extends React.Component {
                         window.location.reload();
 
                     }, function () {
-                        alert('Something went wrong')
+                        NotificationManager.error('Something went wrong', 'Error');
                     })
                 }
               },
@@ -156,6 +159,7 @@ class ManageCards extends React.Component {
     render() {
         return (
             <div className="d-flex justify-content-center align-items-center container">
+                
                 <Card className="shadow p-3 mb-5 bg-white rounded">
                     <CardBody>
                         <select onChange={this.selectCollection} name="collectionName" className="form-control center-block" style={{ width: "400px", margin: "0 auto" }}>
