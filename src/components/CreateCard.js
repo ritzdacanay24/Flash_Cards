@@ -2,16 +2,14 @@
 import React, { useState } from "react";
 import API from '../api';
 import {
-    Card, CardBody,
-    Toast, ToastBody, ToastHeader
+    Card, CardBody
 } from 'reactstrap';
+import { NotificationManager } from 'react-notifications';
 
 const CreateCard = () => {
 
     let fields = { word: "", definition: "" };
     const [inputList, setInputList] = useState([fields]);
-    const [show, setShow] = useState(false);
-    const toggle = () => setShow(!show);
     let setTitle = React.createRef();
 
     // handle input change
@@ -62,17 +60,14 @@ const CreateCard = () => {
         setInputList([fields]);
 
         //show success message
-        toggle()
+        
+        NotificationManager.success('Created successfully', 'Success');
     }
 
     return (
 
         <div class="d-flex justify-content-center align-items-center container">
             <Card className="shadow p-3 mb-5 bg-white rounded">
-                <Toast isOpen={show} className="toast" fade={true}>
-                    <ToastHeader toggle={toggle} icon="success">Success!</ToastHeader>
-                    <ToastBody> Successfully submitted! </ToastBody>
-                </Toast>
 
                 <CardBody>
                     <h3>Create Collection</h3>

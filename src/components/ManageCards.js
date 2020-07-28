@@ -3,7 +3,7 @@ import API from '../api';
 import { Card, CardBody } from 'reactstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 
 class ManageCards extends React.Component {
 
