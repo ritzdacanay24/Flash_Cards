@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.inset {
+  font: bold 200px arial, sans-serif;
+  background-color: #565656;
+  color: transparent;
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.6);
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+}
+
+.pointer {
+  cursor: pointer;
+}
