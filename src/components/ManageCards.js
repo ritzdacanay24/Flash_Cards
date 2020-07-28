@@ -178,6 +178,7 @@ class ManageCards extends React.Component {
                                             className="form-control"
                                             onChange={this.createChange}
                                             type="text"
+                                            autocomplete="off"
                                         />
                                         <input
                                             name="definition"
@@ -185,6 +186,7 @@ class ManageCards extends React.Component {
                                             placeholder="Enter new definition"
                                             onChange={this.createChange}
                                             type="text"
+                                            autocomplete="off"
                                         />
                                         <div className="input-group-append">
                                             <button className="mr10" className="btn btn-outline-success" type="reset" onClick={this.createCardSubmit}>Add</button>
@@ -195,16 +197,17 @@ class ManageCards extends React.Component {
 
                                 {!this.state.cards.length ? <p>No cards found.</p> : <p>Modify cards below</p>} 
 
-                                <div style={{ height: "calc(80vh - 230px)", overflow: "auto" }}>
+                                <div style={{ height: "calc(75vh - 230px)", overflow: "auto" }}>
                                     {
                                         this.state.cards.map((card, index) => {
                                             return (
-                                                <div className="input-group mb-3 pr-1" key={card._id}>
+                                                <div className="input-group mb-3 p-1" key={card._id}>
                                                     <input
                                                         name='word'
                                                         placeholder="Enter word"
                                                         defaultValue={card.word}
                                                         className="form-control"
+                                                        autocomplete="off"
                                                         onChange={(e) => this.updateChange(e, card)}
                                                     />
                                                     <input
@@ -212,11 +215,12 @@ class ManageCards extends React.Component {
                                                         className="form-control"
                                                         placeholder="Enter definition"
                                                         defaultValue={card.definition}
+                                                        autocomplete="off"
                                                         onChange={(e) => this.updateChange(e, card)}
                                                     />
                                                     <div className="input-group-append">
                                                         <button className="mr10" className="btn btn-outline-danger" onClick={() => this.removeCardById(index, card._id)}>Remove</button>
-                                                        <button className="mr10" className="btn btn-outline-success" onClick={this.updateCardSubmit}>Update</button>
+                                                        <button className="mr10" className="btn btn-outline-info" onClick={this.updateCardSubmit}>Update</button>
                                                     </div>
                                                 </div>
                                             );

@@ -81,6 +81,7 @@ const CreateCard = () => {
                         name="title"
                         placeholder="Enter collection title"
                         className="form-control"
+                        autocomplete="off"
                         ref={setTitle}
                     />
                     <br />
@@ -95,6 +96,7 @@ const CreateCard = () => {
                                         placeholder="Enter word"
                                         value={x.word}
                                         className="form-control"
+                                        autocomplete="off"
                                         onChange={e => handleInputChange(e, i)}
                                     />
                                     <input
@@ -103,6 +105,7 @@ const CreateCard = () => {
                                         className="form-control"
                                         placeholder="Enter definition"
                                         value={x.definition}
+                                        autocomplete="off"
                                         onChange={e => handleInputChange(e, i)}
                                     />
                                     {inputList.length - 1 === i && <button class="btn btn-primary" type="button" onClick={handleAddClick}>Add More</button>}
