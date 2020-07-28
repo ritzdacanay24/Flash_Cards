@@ -66,7 +66,7 @@ const CreateCard = () => {
 
     return (
 
-        <div class="d-flex justify-content-center align-items-center container">
+        <div className="d-flex justify-content-center align-items-center container">
             <Card className="shadow p-3 mb-5 bg-white rounded">
 
                 <CardBody>
@@ -85,7 +85,7 @@ const CreateCard = () => {
                     {inputList.map((x, i) => {
                         return (
                             <div>
-                                <div class="input-group mb-3">
+                                <div className="input-group mb-3">
                                     <input
                                         name="word"
                                         placeholder="Enter word"
@@ -103,16 +103,16 @@ const CreateCard = () => {
                                         autocomplete="off"
                                         onChange={e => handleInputChange(e, i)}
                                     />
-                                    {inputList.length - 1 === i && <button class="btn btn-primary" type="button" onClick={handleAddClick}>Add More</button>}
+                                    {inputList.length - 1 === i && <button className="btn btn-primary" type="button" onClick={handleAddClick}>Add More</button>}
                                     {inputList.length !== 1 && <div class="input-group-append">
-                                            <button className="mr10" onClick={() => handleRemoveClick(i)} class="btn btn-outline-danger">Remove</button>
+                                            <button className="mr10" onClick={() => handleRemoveClick(i)} className="btn btn-outline-danger">Remove</button>
                                         </div>
                                     }
                                 </div>
                             </div>
                         );
                     })}
-                    <button class="btn btn-outline-success" onClick={() => submit()}>Submit</button>
+                    <button className="btn btn-outline-success" onClick={() => submit()}>Submit</button>
                 </CardBody>
             </Card>
         </div>
