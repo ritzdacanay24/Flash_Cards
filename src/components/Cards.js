@@ -42,9 +42,9 @@ export default class Cards extends React.Component {
                     {
                         this.state.cards.map((person, index) =>
                             <div className="col-lg-4 px-md-5" key={index}>
-                                <Card onClick={() => this.goToCarddetails(person._id, person.cards.length)}>
+                                <Card className="shadow p-3 mb-5 bg-white rounded" onClick={() => this.goToCarddetails(person._id, person.cards.length)}>
                                     <CardBody>
-                                        <CardTitle>{person.title}</CardTitle>
+                                        <CardTitle><h3>{person.title}</h3></CardTitle>
                                         <CardSubtitle>Total: {person.cards.length}</CardSubtitle>
                                     </CardBody>
                                 </Card>
