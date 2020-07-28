@@ -67,8 +67,8 @@ class ManageCards extends React.Component {
                 cardsInfo._id = res.data._id
                 cards.push(cardsInfo);
                 this.setState({
-                    add : this.collectionFields,
-                    cards : cards
+                    add: this.collectionFields,
+                    cards: cards
                 })
             }, function () {
                 alert('Something went wrong')
@@ -79,11 +79,11 @@ class ManageCards extends React.Component {
         let cardId = this.state.add._id;
         delete this.state.add._id
         API.put(`http://localhost:5000/api/collections/${this.state.collectionId}/cards/${cardId}`, this.state.add)
-        .then(res => {
-            console.log(res)
-        }, function () {
-            alert('Something went wrong')
-        })
+            .then(res => {
+                console.log(res)
+            }, function () {
+                alert('Something went wrong')
+            })
     }
 
     updateChange = (e, card) => {
@@ -96,13 +96,25 @@ class ManageCards extends React.Component {
             }
         })
     }
-    
+
+    removeCardById = (index, cardId) => {
+        API.delete(`http://localhost:5000/api/collections/${this.state.collectionId}/cards/${cardId}`)
+            .then(res => {
+                let cards = this.state.cards;
+                cards.splice(index, 1);
+                this.setState({ cards });
+
+            }, function () {
+                alert('Something went wrong')
+            })
+    }
+
     render() {
         return (
             <div className="d-flex justify-content-center align-items-center container">
                 <Card className="shadow p-3 mb-5 bg-white rounded">
                     <CardBody>
-                        <select onChange={this.selectCollection} name="collectionName" className="form-control center-block" style={{width: "400px", margin: "0 auto"}}>
+                        <select onChange={this.selectCollection} name="collectionName" className="form-control center-block" style={{ width: "400px", margin: "0 auto" }}>
                             <option defaultValue="" selected disabled>Select Collection</option>
                             {
                                 this.state.details.map((card, index) =>
@@ -111,8 +123,8 @@ class ManageCards extends React.Component {
                             }
                         </select>
                         <br></br>
-                        
-                        {this.state.cards.length > 0 &&
+
+                        {this.state.collectionId &&
                             <div>
                                 <form>
                                     <div className="input-group mb-3">
@@ -138,11 +150,11 @@ class ManageCards extends React.Component {
                                 <br />
 
                                 <p>Modify cards below</p>
-                                <div style={{height: "calc(80vh - 230px)", overflow: "auto"}}>
+                                <div style={{ height: "calc(80vh - 230px)", overflow: "auto" }}>
                                     {
-                                        this.state.cards.map((card, index) =>
-                                            <div key={`group-input-${index}`}>
-                                                <div className="input-group mb-3 pr-1">
+                                        this.state.cards.map((card, index) => {
+                                            return (
+                                                <div className="input-group mb-3 pr-1" key={card._id}>
                                                     <input
                                                         name='word'
                                                         placeholder="Enter word"
@@ -158,13 +170,12 @@ class ManageCards extends React.Component {
                                                         onChange={(e) => this.updateChange(e, card)}
                                                     />
                                                     <div className="input-group-append">
-                                                        <button className="mr10" className="btn btn-outline-danger">Remove</button>
+                                                        <button className="mr10" className="btn btn-outline-danger" onClick={() => this.removeCardById(index, card._id)}>Remove</button>
                                                         <button className="mr10" className="btn btn-outline-success" onClick={this.updateCardSubmit}>Update</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    }
+                                            );
+                                        })}
                                 </div>
                             </div>
                         }
