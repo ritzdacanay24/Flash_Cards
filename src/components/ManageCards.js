@@ -193,7 +193,7 @@ class ManageCards extends React.Component {
                                             autocomplete="off"
                                         />
                                         <div className="input-group-append">
-                                            <button className="mr10" className="btn btn-outline-success" type="reset" onClick={this.createCardSubmit}>Add</button>
+                                            <button className="btn btn-outline-success" type="reset" onClick={this.createCardSubmit}>Add</button>
                                         </div>
                                     </div>
                                 </form>
@@ -223,8 +223,8 @@ class ManageCards extends React.Component {
                                                         onChange={(e) => this.updateChange(e, card)}
                                                     />
                                                     <div className="input-group-append">
-                                                        <button className="mr10" className="btn btn-outline-danger" onClick={() => this.removeCardById(index, card._id)}>Remove</button>
-                                                        <button className="mr10" className="btn btn-outline-info" onClick={this.updateCardSubmit}>Update</button>
+                                                        <button className="btn btn-outline-danger" onClick={() => this.removeCardById(index, card._id)}>Remove</button>
+                                                        <button className="btn btn-outline-info" onClick={this.updateCardSubmit}>Update</button>
                                                     </div>
                                                 </div>
                                             );
@@ -232,7 +232,7 @@ class ManageCards extends React.Component {
                                 </div>
                             </div>
                         }
-                        {this.state.collectionId && <button className="mr10" className="btn btn-danger" type="reset" onClick={this.deleteCollection}>Delete Collection</button>}
+                        {this.state.collectionId && <button  className="btn btn-danger" type="reset" onClick={this.deleteCollection}>Delete Collection</button>}
                     </CardBody>
                 </Card>
             </div>
