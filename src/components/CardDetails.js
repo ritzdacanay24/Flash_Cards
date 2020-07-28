@@ -94,7 +94,7 @@ export default class CardDetails extends React.Component {
             this.changeCardId(this.state.currentIndex, 'right')
         } else if (event.keyCode === 37) {
             this.changeCardId(this.state.currentIndex, 'left')
-        } else if (event.keyCode == 0 || event.keyCode == 32) {
+        } else if (event.keyCode === 0 || event.keyCode === 32) {
             this.viewResults()
         }
     }
