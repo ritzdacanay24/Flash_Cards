@@ -1,8 +1,8 @@
 import React from 'react';
 import API from '../api';
 import { Card, CardBody } from 'reactstrap';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 class ManageCards extends React.Component {
 
@@ -100,7 +100,6 @@ class ManageCards extends React.Component {
     }
 
     removeCardById = (index, cardId) => {
-
         confirmAlert({
             title: 'Confirm to delete',
             message: 'Are you sure you want to delete this card? This cannot be undone!',
@@ -124,12 +123,9 @@ class ManageCards extends React.Component {
               }
             ]
           });
-
-        
     }
 
     deleteCollection = () => {
-
         confirmAlert({
             title: 'Confirm to delete',
             message: 'Are you sure you want to delete this collection? This cannot be undone!',
