@@ -95,7 +95,6 @@ const CreateCard = () => {
                                         onChange={e => handleInputChange(e, i)}
                                     />
                                     <input
-                                        className="ml10"
                                         name="definition"
                                         className="form-control"
                                         placeholder="Enter definition"
@@ -105,7 +104,7 @@ const CreateCard = () => {
                                     />
                                     {inputList.length - 1 === i && <button className="btn btn-primary" type="button" onClick={handleAddClick}>Add More</button>}
                                     {inputList.length !== 1 && <div class="input-group-append">
-                                            <button className="mr10" onClick={() => handleRemoveClick(i)} className="btn btn-outline-danger">Remove</button>
+                                            <button onClick={() => handleRemoveClick(i)} className="btn btn-outline-danger">Remove</button>
                                         </div>
                                     }
                                 </div>
