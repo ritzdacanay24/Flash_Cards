@@ -149,7 +149,8 @@ class ManageCards extends React.Component {
                                 </form>
                                 <br />
 
-                                <p>Modify cards below</p>
+                                {!this.state.cards.length ? <p>No cards found.</p> : <p>Modify cards below</p>} 
+
                                 <div style={{ height: "calc(80vh - 230px)", overflow: "auto" }}>
                                     {
                                         this.state.cards.map((card, index) => {
