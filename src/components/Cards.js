@@ -1,5 +1,6 @@
 import React from 'react';
-import axios from 'axios';
+import API from '../api';
+
 import {
     Card, CardBody,
     CardTitle, CardSubtitle
@@ -20,7 +21,7 @@ export default class Cards extends React.Component {
     }
 
     getCollection = () => {
-        axios.get('http://localhost:5000/api/collections')
+        API.get('api/collections')
         .then(res => {
             this.setState({ cards: res.data })
         })
@@ -35,9 +36,6 @@ export default class Cards extends React.Component {
         this.props.history.push('/CardsDetails', { cardId: cardId })
     }
 
-    search = () => {
-        console.log('asdf')
-    }
     render() {
         return (
             <div className="container">
