@@ -1,10 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import EditDetailsModal from './EditDetails.js';
-
-import {
-    Button, Progress
-} from 'reactstrap';
+import { Button, Popover, PopoverHeader, PopoverBody, Progress } from "reactstrap";
 
 export default class CardDetails extends React.Component {
 
@@ -16,15 +13,21 @@ export default class CardDetails extends React.Component {
             startViewDetails: [],
             showResults: false,
             currentIndex: null,
-            collectionId: null
+            collectionId: null,
+            popoverOpen: false
         }
 
         this.shortCutKeys = this.shortCutKeys.bind(this);
+        this.togglePopover = this.togglePopover.bind(this);
     }
 
     componentDidMount() {
         this.getCollectionById();
         document.addEventListener("keydown", this.shortCutKeys, false);
+    }
+
+    togglePopover() {
+        this.setState({ popoverOpen: !this.state.popoverOpen })
     }
 
     getCollectionById = () => {
@@ -54,7 +57,7 @@ export default class CardDetails extends React.Component {
         if (type !== null) {
             type === 'right' ? startView++ : startView--
         }
-        
+
         for (let i = 0; i < this.state.details.length; i++) {
             if (i === startView) {
                 this.setState({
@@ -126,16 +129,36 @@ export default class CardDetails extends React.Component {
                                         {
                                             !this.state.showResults ? <div class="btn-group" role="group" aria-label="Basic example">
                                                 <Button className="mt-auto" color="danger" onClick={() => this.viewResults()}>See Definition!</Button>
-                                                <EditDetailsModal className="text-right" modalTitle="Edit" buttonLabel="Edit" details={this.state.startViewDetails} collectionId={this.state.collectionId}/>
-                                                </div> :
-                                            <Button className="mt-auto" color="danger" onClick={() => this.viewResults()}>See Word!</Button>
-                                            
+                                                <EditDetailsModal className="text-right" modalTitle="Edit" buttonLabel="Edit" details={this.state.startViewDetails} collectionId={this.state.collectionId} />
+                                            </div> :
+                                                <Button className="mt-auto" color="danger" onClick={() => this.viewResults()}>See Word!</Button>
+
                                         }
                                     </div>
                                 </div>
                             </div>
-                            <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'left')}> &larr; Left </span> &nbsp;&nbsp;
-                            <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'right')}> Right 	&rarr;</span>
+                            <div className="float-left">
+                                <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'left')}> &larr; Left </span> &nbsp;&nbsp;
+                                <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'right')}> Right 	&rarr;</span>
+
+                            </div>
+                            <Button id="mypopover" type="button" className="float-right">
+                                Keyboard Keys
+                                </Button>
+                            <Popover
+                                placement="top"
+                                isOpen={this.state.popoverOpen}
+                                target="mypopover"
+                                toggle={this.togglePopover}
+                                st
+                            >
+                                <PopoverHeader>Keyboard Keys</PopoverHeader>
+                                <PopoverBody>
+                                    <p>Next <kbd>&rarr;</kbd> </p>
+                                    <p>Previous <kbd>&larr;</kbd> </p>
+                                    <p>Flip Card <kbd>Spacebar  </kbd> </p>
+                                </PopoverBody>
+                            </Popover>
                         </div>
                     </div>
                 </div>
