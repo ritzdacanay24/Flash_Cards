@@ -65,8 +65,12 @@ class ManageCards extends React.Component {
         let cardsInfo = this.state.add;
         API.post('http://localhost:5000/api/collections/' + this.state.collectionId + '/cards', cardsInfo)
             .then(res => {
+                let finalResults = res.data.cards;
+                
+                var cardId = finalResults[finalResults.length - 1];
+
                 let cards = [...this.state.cards];
-                cardsInfo._id = res.data._id
+                cardsInfo._id = cardId._id
                 cards.push(cardsInfo);
                 this.setState({
                     add: this.collectionFields,
