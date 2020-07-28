@@ -1,6 +1,8 @@
 import React from 'react';
 import API from '../api';
 import { Card, CardBody } from 'reactstrap';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 class ManageCards extends React.Component {
 
@@ -98,15 +100,57 @@ class ManageCards extends React.Component {
     }
 
     removeCardById = (index, cardId) => {
-        API.delete(`http://localhost:5000/api/collections/${this.state.collectionId}/cards/${cardId}`)
-            .then(res => {
-                let cards = this.state.cards;
-                cards.splice(index, 1);
-                this.setState({ cards });
 
-            }, function () {
-                alert('Something went wrong')
-            })
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure you want to delete this card? This cannot be undone!',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    API.delete(`http://localhost:5000/api/collections/${this.state.collectionId}/cards/${cardId}`)
+                    .then(res => {
+                        let cards = this.state.cards;
+                        cards.splice(index, 1);
+                        this.setState({ cards });
+
+                    }, function () {
+                        alert('Something went wrong')
+                    })
+                }
+              },
+              {
+                label: 'No'
+              }
+            ]
+          });
+
+        
+    }
+
+    deleteCollection = () => {
+
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure you want to delete this collection? This cannot be undone!',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    API.delete(`http://localhost:5000/api/collections/${this.state.collectionId}`)
+                    .then(res => {
+                        window.location.reload();
+
+                    }, function () {
+                        alert('Something went wrong')
+                    })
+                }
+              },
+              {
+                label: 'No'
+              }
+            ]
+          });
     }
 
     render() {
@@ -180,6 +224,7 @@ class ManageCards extends React.Component {
                                 </div>
                             </div>
                         }
+                        {this.state.collectionId && <button className="mr10" className="btn btn-danger" type="reset" onClick={this.deleteCollection}>Delete Collection</button>}
                     </CardBody>
                 </Card>
             </div>
