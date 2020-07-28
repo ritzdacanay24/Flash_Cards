@@ -34,7 +34,7 @@ const EditDetailsModal = (props) => {
     return (
         <div>
             <Form inline>
-                <Button color="danger" onClick={toggle}>{buttonLabel}</Button>
+                <Button color="warning" onClick={toggle}>{buttonLabel}</Button>
             </Form>
             <Modal isOpen={modal} toggle={toggle} className={className} unmountOnClose={unmountOnClose}>
                 <ModalHeader toggle={toggle}>{modalTitle}</ModalHeader>

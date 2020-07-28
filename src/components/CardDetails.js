@@ -47,22 +47,16 @@ export default class CardDetails extends React.Component {
 
     //save current index when page is refreshed.
     getCurrentIndex = () => {
-        let isIndexSet = localStorage.getItem('flash_cards');
-        if (isIndexSet) {
-            this.changeCardId(parseInt(isIndexSet) + 1, true)
-        } else {
-            this.changeCardId(0)
-        }
+        this.changeCardId(0, null)
     }
 
     changeCardId = (startView, type) => {
         if (type !== null) {
             type === 'right' ? startView++ : startView--
         }
-
+        
         for (let i = 0; i < this.state.details.length; i++) {
             if (i === startView) {
-                localStorage.setItem('flash_cards', i);
                 this.setState({
                     startViewDetails: this.state.details[i],
                     currentIndex: i,
@@ -130,7 +124,10 @@ export default class CardDetails extends React.Component {
 
                                     <div class="card-footer align-items-center d-flex justify-content-center bg-white border-0">
                                         {
-                                            !this.state.showResults ? <Button className="mt-auto" color="danger" onClick={() => this.viewResults()}>See Definition!</Button> :
+                                            !this.state.showResults ? <div class="btn-group" role="group" aria-label="Basic example">
+                                                <Button className="mt-auto" color="danger" onClick={() => this.viewResults()}>See Definition!</Button>
+                                                <EditDetailsModal className="text-right" modalTitle="Edit" buttonLabel="Edit" details={this.state.startViewDetails} collectionId={this.state.collectionId}/>
+                                                </div> :
                                             <Button className="mt-auto" color="danger" onClick={() => this.viewResults()}>See Word!</Button>
                                             
                                         }
@@ -139,7 +136,6 @@ export default class CardDetails extends React.Component {
                             </div>
                             <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'left')}> &larr; Left </span> &nbsp;&nbsp;
                             <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'right')}> Right 	&rarr;</span>
-                            <span><EditDetailsModal modalTitle="Edit" buttonLabel="Edit" details={this.state.startViewDetails} collectionId={this.state.collectionId}/></span>
                         </div>
                     </div>
                 </div>

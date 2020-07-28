@@ -165,7 +165,7 @@ class ManageCards extends React.Component {
                 <Card className="shadow p-3 mb-5 bg-white rounded">
                     <CardBody>
                         <select onChange={this.selectCollection} name="collectionName" className="form-control center-block" style={{ width: "400px", margin: "0 auto" }}>
-                            <option defaultValue="" selected disabled>Select Collection</option>
+                            <option value="Select Collection" disabled selected>Select Collection</option>
                             {
                                 this.state.details.map((card, index) =>
                                     <option key={index} value={card._id}>{card.title}</option>
