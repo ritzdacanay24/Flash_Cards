@@ -9,7 +9,6 @@ class ManageCards extends React.Component {
 
     constructor(props) {
         super(props);
-        this.getAllCollections();
 
         this.collectionFields = {
             word: "",
@@ -23,9 +22,12 @@ class ManageCards extends React.Component {
             updateCardInfo: {},
             collectionId: null
         }
+    }
 
+    componentDidMount() {
         this.createCardSubmit = this.createCardSubmit.bind(this);
         this.updateCardSubmit = this.updateCardSubmit.bind(this);
+        this.getAllCollections();
     }
 
     getAllCollections = () => {
