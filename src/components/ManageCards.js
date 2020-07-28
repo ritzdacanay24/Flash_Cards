@@ -29,7 +29,7 @@ class ManageCards extends React.Component {
     }
 
     getAllCollections = () => {
-        API.get('http://localhost:5000/api/collections/')
+        API.get('api/collections/')
             .then(res => {
                 const details = res.data;
                 this.setState({ details })
@@ -43,7 +43,7 @@ class ManageCards extends React.Component {
     selectCollection = (e) => {
         let { value } = e.target;
 
-        API.get(`http://localhost:5000/api/collections/${value}/cards`)
+        API.get(`api/collections/${value}/cards`)
             .then(res => {
                 this.setState({ collectionId: value, cards: res.data })
             }, function () {
@@ -64,7 +64,7 @@ class ManageCards extends React.Component {
 
     createCardSubmit(event) {
         let cardsInfo = this.state.add;
-        API.post('http://localhost:5000/api/collections/' + this.state.collectionId + '/cards', cardsInfo)
+        API.post('api/collections/' + this.state.collectionId + '/cards', cardsInfo)
             .then(res => {
                 let finalResults = res.data.cards;
                 
@@ -86,7 +86,7 @@ class ManageCards extends React.Component {
     updateCardSubmit() {
         let cardId = this.state.add._id;
         delete this.state.add._id
-        API.put(`http://localhost:5000/api/collections/${this.state.collectionId}/cards/${cardId}`, this.state.add)
+        API.put(`api/collections/${this.state.collectionId}/cards/${cardId}`, this.state.add)
             .then(res => {
                 NotificationManager.success('Updated successfully', 'Success');
             }, function () {
@@ -113,7 +113,7 @@ class ManageCards extends React.Component {
               {
                 label: 'Yes',
                 onClick: () => {
-                    API.delete(`http://localhost:5000/api/collections/${this.state.collectionId}/cards/${cardId}`)
+                    API.delete(`api/collections/${this.state.collectionId}/cards/${cardId}`)
                     .then(res => {
                         let cards = this.state.cards;
                         cards.splice(index, 1);
@@ -140,7 +140,7 @@ class ManageCards extends React.Component {
               {
                 label: 'Yes',
                 onClick: () => {
-                    API.delete(`http://localhost:5000/api/collections/${this.state.collectionId}`)
+                    API.delete(`api/collections/${this.state.collectionId}`)
                     .then(res => {
                         window.location.reload();
 

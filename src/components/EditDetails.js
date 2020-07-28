@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
-import axios from 'axios';
+import API from '../api';
 
 const EditDetailsModal = (props) => {
 
@@ -18,7 +18,7 @@ const EditDetailsModal = (props) => {
             definition : props
         }
 
-        axios.put(`http://localhost:5000/api/collections/${collectionId}/cards/${details._id}`, obj )
+        API.put(`api/collections/${collectionId}/cards/${details._id}`, obj )
         .then(res => {
             setModal(false);
         }, function(){
