@@ -3,8 +3,6 @@ import axios from 'axios';
 import EditDetailsModal from './EditDetails.js';
 
 import {
-    Card, CardBody, CardFooter,
-    CardTitle, CardSubtitle,
     Button, Progress
 } from 'reactstrap';
 
