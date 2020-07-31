@@ -59,7 +59,7 @@ export default class CardDetails extends React.Component {
 
     changeCardId = (startView, type, showResults = false) => {
         if (type !== null) {
-            type !== null && type === 'right' ? startView++ : startView--
+            type === 'right' ? startView++ : startView--
         }
 
         for (let i = 0; i < this.state.details.length; i++) {
