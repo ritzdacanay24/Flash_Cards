@@ -23,7 +23,8 @@ export default class CardDetails extends React.Component {
             currentIndex: null,
             collectionId: null,
             popoverOpen: false,
-            quiz: this.quizInfo
+            quiz: this.quizInfo,
+            suffleCards: false
         }
 
         this.shortCutKeys = this.shortCutKeys.bind(this);
@@ -44,17 +45,42 @@ export default class CardDetails extends React.Component {
         axios.get('http://localhost:5000/api/collections/' + this.props.location.state.cardId)
             .then(res => {
 
-                this.setState({
-                    collectionId: res.data._id,
-                    details: res.data.cards,
-                    showResults: false
-                })
+                this.suffleCards(res.data.cards);
+
+                this.setState({ collectionId: res.data._id})
 
                 this.changeCardId(0, null)
 
             }, function () {
                 alert('Something went wrong')
             })
+    }
+
+    setShuffleCards = () => {
+        this.setState({
+            suffleCards: true
+        })
+        this.suffleCards(this.state.details)
+    }
+
+    suffleCards = (cards) => {
+        if(this.state.suffleCards){
+            //loop through cards
+            for (let i = 0; i < cards.length - 1; i++) {
+                let k = i + Math.floor(Math.random() * (cards.length - i));
+        
+                let temp = cards[k];
+                cards[k] = cards[i];
+                cards[i] = temp;
+            }
+        }
+        
+        this.setState({
+            details: cards,
+            showResults: false
+        })
+
+        this.changeCardId(0, null)
     }
 
     changeCardId = (startView, type, showResults = false) => {
@@ -248,6 +274,7 @@ export default class CardDetails extends React.Component {
 
                                             }
                                             <Button className="mt-auto" color="info" onClick={() => this.takeQuiz()}>Take Quiz!</Button>
+                                            <Button className="mt-auto" color="info" onClick={() => this.setShuffleCards()}>Shuffle Cards!</Button>
                                         </div>
                                     }
                                 </div>
