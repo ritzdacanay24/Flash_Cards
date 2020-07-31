@@ -1,5 +1,5 @@
 import React from 'react';
-import API from '../api';
+import API from '../../api';
 import { Card, CardBody } from 'reactstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';

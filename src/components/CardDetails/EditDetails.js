@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input, Label, Form, FormGroup } from 'reactstrap';
-import API from '../api';
+import API from '../../api';
 
 const EditDetailsModal = (props) => {
 

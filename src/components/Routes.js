@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 
-import Cards from '../Cards';
-import CardDetails from '../CardDetails';
-import ManageCards from '../ManageCards';
-import CreateCard from '../CreateCard';
-import history from '../../history';
+import Cards from './Cards/Cards';
+import CardDetails from './CardDetails/CardDetails';
+import ManageCards from './ManageCards/ManageCards';
+import CreateCard from './CreateCard/CreateCard';
+import history from '../history';
 
 export default class Routes extends Component {
     render() {
