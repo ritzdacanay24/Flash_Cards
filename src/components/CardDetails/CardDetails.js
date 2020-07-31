@@ -3,6 +3,9 @@ import axios from 'axios';
 import EditDetailsModal from './EditDetails.js';
 import { Button, Popover, PopoverHeader, PopoverBody, Progress } from "reactstrap";
 import { NotificationManager } from 'react-notifications';
+import './cardDetails.css';
+import { AnimateOnChange, HideUntilLoaded } from 'react-animation'
+
 
 export default class CardDetails extends React.Component {
 
@@ -47,7 +50,7 @@ export default class CardDetails extends React.Component {
 
                 this.suffleCards(res.data.cards);
 
-                this.setState({ collectionId: res.data._id})
+                this.setState({ collectionId: res.data._id })
 
                 this.changeCardId(0, null)
 
@@ -64,17 +67,17 @@ export default class CardDetails extends React.Component {
     }
 
     suffleCards = (cards) => {
-        if(this.state.suffleCards){
+        if (this.state.suffleCards) {
             //loop through cards
             for (let i = 0; i < cards.length - 1; i++) {
                 let k = i + Math.floor(Math.random() * (cards.length - i));
-        
+
                 let temp = cards[k];
                 cards[k] = cards[i];
                 cards[i] = temp;
             }
         }
-        
+
         this.setState({
             details: cards,
             showResults: false
@@ -84,6 +87,7 @@ export default class CardDetails extends React.Component {
     }
 
     changeCardId = (startView, type, showResults = false) => {
+
         if (type !== null) {
             type === 'right' ? startView++ : startView--
         }
@@ -117,7 +121,7 @@ export default class CardDetails extends React.Component {
     }
 
     shortCutKeys(event) {
-        if(!this.state.quiz.isQuiz){
+        if (!this.state.quiz.isQuiz) {
             if (event.keyCode === 39) {
                 this.changeCardId(this.state.currentIndex, 'right')
             } else if (event.keyCode === 37) {
@@ -153,19 +157,19 @@ export default class CardDetails extends React.Component {
     }
 
     displayQuizResults = (correctAnsert) => {
-        let userPercentScore = ( correctAnsert /  this.state.details.length ) * 100  ;
+        let userPercentScore = (correctAnsert / this.state.details.length) * 100;
         let userMessage = 'Wheeeee! Awsome job!';
-        if(userPercentScore < 50){
+        if (userPercentScore < 50) {
             userMessage = 'Need more practice my brother!';
-        }else if(userPercentScore < 75){
+        } else if (userPercentScore < 75) {
             userMessage = 'Not too shabby!';
         }
-        
+
         NotificationManager.info(userMessage, ` Your score is ${correctAnsert} of ${this.state.details.length}`);
 
         //Quiz is complete. Reset quiz values
         this.setState({
-            showResults: false, 
+            showResults: false,
             quiz: this.quizInfo
         })
 
@@ -180,7 +184,7 @@ export default class CardDetails extends React.Component {
 
     submitAnswer = (e) => {
         e.preventDefault()
-        
+
         let currentIndex = this.offsetIndex();
         let correctAnsert = this.state.quiz.correct;
 
@@ -202,20 +206,20 @@ export default class CardDetails extends React.Component {
             NotificationManager.warning('Sorry, that is incorrect', 'Incorrect', 2000);
         }
 
-        if(currentIndex === this.state.details.length){
+        if (currentIndex === this.state.details.length) {
             //No more cards, lets display the results to the user.
             this.displayQuizResults(correctAnsert)
-        }else{
+        } else {
             //If the collection of cards has only one, display end results.
-            if(this.state.details.length == 1){
+            if (this.state.details.length == 1) {
                 this.displayQuizResults(correctAnsert)
-            }else{
+            } else {
                 //clear input and move on to the next card.
                 document.getElementById("userAnswer").reset();
                 this.changeCardId(this.state.currentIndex, 'right', true)
             }
         }
-        
+
     }
 
     render() {
@@ -231,7 +235,7 @@ export default class CardDetails extends React.Component {
 
                         <div class="text-center h-100">
                             <div class="text-center my-auto">
-                                
+
                                 <div class="card card-block d-flex  shadow p-3 mb-5 bg-white rounded" style={{ height: "calc(75vh - 230px)", overflow: "auto" }}>
 
                                     {
@@ -241,13 +245,17 @@ export default class CardDetails extends React.Component {
                                     {!this.state.showResults ?
 
                                         <div class="card-body align-items-center d-flex justify-content-center">
-                                            <h1>{this.state.startViewDetails.word}</h1>
+
+                                            <h1><AnimateOnChange animationOut="bounceOut" animationIn="bounceIn" durationOut="500" animate={false}>{this.state.startViewDetails.word}</AnimateOnChange></h1>
+
                                         </div>
 
                                         :
 
                                         <div class="card-body align-items-center d-flex justify-content-center">
-                                            <h1>{this.state.startViewDetails.definition}</h1>
+
+                                            <h1><AnimateOnChange animationOut="bounceOut" animationIn="bounceIn" durationOut="500" animate={false}>{this.state.startViewDetails.definition}</AnimateOnChange></h1>
+
                                         </div>
                                     }
 
