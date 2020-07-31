@@ -87,6 +87,7 @@ export default class CardDetails extends React.Component {
     }
 
     changeCardId = (startView, type, showResults = false) => {
+        if (this.state.quiz.isQuiz) return;
 
         if (type !== null) {
             type === 'right' ? startView++ : startView--
