@@ -87,7 +87,6 @@ export default class CardDetails extends React.Component {
     }
 
     changeCardId = (startView, type, showResults = false) => {
-        if (this.state.quiz.isQuiz) return;
 
         if (type !== null) {
             type === 'right' ? startView++ : startView--
@@ -288,28 +287,34 @@ export default class CardDetails extends React.Component {
                                     }
                                 </div>
                             </div>
-                            <div className="float-left">
-                                <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'left')}> &larr; Left </span> &nbsp;&nbsp;
-                                <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'right')}> Right 	&rarr;</span>
 
-                            </div>
-                            <Button id="mypopover" type="button" className="float-right">
-                                Keyboard Keys
-                                </Button>
-                            <Popover
-                                placement="top"
-                                isOpen={this.state.popoverOpen}
-                                target="mypopover"
-                                toggle={this.togglePopover}
-                                st
-                            >
-                                <PopoverHeader>Keyboard Keys</PopoverHeader>
-                                <PopoverBody>
-                                    <p>Next <kbd>&rarr;</kbd> </p>
-                                    <p>Previous <kbd>&larr;</kbd> </p>
-                                    <p>Flip Card <kbd>Spacebar  </kbd> </p>
-                                </PopoverBody>
-                            </Popover>
+                            {
+                                !this.state.quiz.isQuiz &&
+                                <div>
+                                    <div className="float-left">
+                                        <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'left')}> &larr; Left </span> &nbsp;&nbsp;
+                                        <span className="pointer" onClick={() => this.changeCardId(this.state.currentIndex, 'right')}> Right 	&rarr;</span>
+                                    </div>
+                                    <Button id="mypopover" type="button" className="float-right">
+                                        Keyboard Keys
+                                    </Button>
+                                    <Popover
+                                        placement="top"
+                                        isOpen={this.state.popoverOpen}
+                                        target="mypopover"
+                                        toggle={this.togglePopover}
+                                        st
+                                    >
+                                        <PopoverHeader>Keyboard Keys</PopoverHeader>
+                                        <PopoverBody>
+                                            <p>Next <kbd>&rarr;</kbd> </p>
+                                            <p>Previous <kbd>&larr;</kbd> </p>
+                                            <p>Flip Card <kbd>Spacebar  </kbd> </p>
+                                        </PopoverBody>
+                                    </Popover>
+                                </div>
+                            }
+
                         </div>
                     </div>
                 </div>
